@@ -8,5 +8,9 @@ import com.example.spi.service.QuoteManager;
  */
 public interface ExchangeRateProvider {
 
+    /**
+     *
+     * @return QuoteManager
+     */
     QuoteManager create();
 }
