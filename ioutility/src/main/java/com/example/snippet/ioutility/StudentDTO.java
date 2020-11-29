@@ -1,7 +1,9 @@
 package com.example.snippet.ioutility;
 
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.hibernate.validator.constraints.NotBlank;
 
@@ -10,6 +12,7 @@ import javax.validation.Validation;
 import javax.validation.Validator;
 import javax.validation.constraints.*;
 import java.util.Set;
+import java.util.concurrent.TimeUnit;
 
 /**
  * @author DechuYe
@@ -18,6 +21,8 @@ import java.util.Set;
 @Slf4j
 @Data
 @Builder
+@AllArgsConstructor
+@NoArgsConstructor
 public class StudentDTO {
 
     @NotNull
@@ -32,11 +37,13 @@ public class StudentDTO {
     @Min(value = 0)
     private int age;
 
-    public static void main(String[] args) {
-
+    public static void main(String[] args) throws InterruptedException {
         Validator validator = Validation.buildDefaultValidatorFactory().getValidator();
-        StudentDTO build = StudentDTO.builder().id(-1L).name("").age(-1).build();
+        StudentDTO build = StudentDTO.builder().id(-1L).name("abcabc").age(-1).build();
         Set<ConstraintViolation<StudentDTO>> validate = validator.validate(build);
+
         validate.forEach(e -> log.error("property: {}, value: {}, msg: {}", e.getPropertyPath(), e.getInvalidValue(), e.getMessage()));
     }
+
+
 }
