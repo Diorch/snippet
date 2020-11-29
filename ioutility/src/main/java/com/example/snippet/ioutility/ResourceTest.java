@@ -18,8 +18,10 @@ public class ResourceTest {
         System.out.println(System.getProperty("sun.boot.class.path"));
         System.out.println(System.getProperty("java.ext.dirs"));
         System.out.println(System.getProperty("java.class.path"));
+        System.out.println(System.getProperty("user.dir"));
 
-        testResource();
+//        testResource();
+
     }
 
     public static void testResource2() {
