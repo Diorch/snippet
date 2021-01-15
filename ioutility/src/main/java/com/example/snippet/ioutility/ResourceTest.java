@@ -19,7 +19,7 @@ public class ResourceTest {
         System.out.println(System.getProperty("java.ext.dirs"));
         System.out.println(System.getProperty("java.class.path"));
         System.out.println(System.getProperty("user.dir"));
-
+        System.out.println(System.getProperty("CLASSPATH"));
 //        testResource();
 
     }
