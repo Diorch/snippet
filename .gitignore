@@ -399,15 +399,3 @@ local.properties
 .cache-main
 .scala_dependencies
 .worksheet
-
-# Uncomment this line if you wish to ignore the project description file.
-# Typically, this file would be tracked if it contains build/dependency configurations:
-#.project
-groovy-demo/src/
-ioutility/src/test/
-spi-api/src/main/resources/
-spi-api/src/test/
-spi-app/src/main/resources/
-spi-app/src/test/
-spi-impl/src/test/
-vavr-demo/src/main/java/
