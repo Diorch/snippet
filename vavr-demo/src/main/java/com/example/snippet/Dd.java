@@ -1,18 +1,17 @@
 package com.example.snippet;
 
-import java.io.IOException;
 import java.util.Arrays;
+import java.util.Optional;
 import java.util.Scanner;
 import java.util.function.Predicate;
 
 import static io.vavr.API.*;
-import static io.vavr.API.run;
 
 /**
  * @author DechuYe
  */
 public class Dd {
-    public static void main(String[] a) throws IOException {
+    public static void main(String[] a) {
         String arg = new Scanner(System.in).nextLine();
         Match(arg).of(
                 Case($(isIn("-h", "--help")), o -> run(Dd::displayHelp)),
@@ -32,6 +31,6 @@ public class Dd {
     }
 
     public static Predicate<String> isIn(String... args) {
-        return (x) -> Arrays.asList(args).contains(x);
+        return x -> Optional.ofNullable(args).map(valid -> Arrays.asList(valid).contains(x)).orElse(false);
     }
 }

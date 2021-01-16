@@ -7,14 +7,17 @@ import io.vavr.control.Option;
 import io.vavr.control.Try;
 import io.vavr.control.Validation;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.collections.CollectionUtils;
 import org.junit.Test;
 
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.Optional;
 import java.util.Scanner;
 import java.util.function.BiFunction;
 import java.util.function.Function;
+import java.util.function.Predicate;
 import java.util.function.Supplier;
 
 import static io.vavr.API.*;
@@ -263,8 +266,7 @@ public class VavrTest {
         }
         if (input == 3) {
             output = "three";
-        }
-        else {
+        } else {
             output = "unknown";
         }
 
@@ -283,7 +285,7 @@ public class VavrTest {
         assertEquals("two", output);
     }
 
-//    @Test
+    //    @Test
     public static void main(String[] a) throws IOException {
         String arg = new Scanner(System.in).nextLine();
         Match(arg).of(
@@ -295,16 +297,24 @@ public class VavrTest {
         );
     }
 
-    public static String displayHelp() {
-        return "help";
+    public static void displayHelp() {
+        System.out.println("help");
     }
 
-    public static String displayVersion() {
-        return "version aaa";
+    public static void displayVersion() {
+        System.out.println("version aaa");
     }
 
-    public static String isIn(String arg1, String arg2) {
-        return "null";
+    public static Predicate<String> isIn(String... args) {
+        return x -> Optional.ofNullable(args).map(valid -> Arrays.asList(valid).contains(x)).orElse(false);
     }
 
+    @Test
+    public void t2() {
+        String[] x = null;
+        final Option<Boolean> a = Option.of(x).map(array -> Arrays.asList(x).contains("a")).orElse(() -> Option.of(Boolean.FALSE));
+        System.out.println(a.get());
+        final Boolean b = Optional.ofNullable(x).map(array -> Arrays.asList(array).contains("a")).orElse(false);
+        System.out.println(b);
+    }
 }
