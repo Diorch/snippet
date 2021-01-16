@@ -1,26 +1,27 @@
 package com.example.snippet;
 
+import io.vavr.Lazy;
+import io.vavr.Tuple;
 import io.vavr.*;
 import io.vavr.collection.List;
 import io.vavr.collection.Seq;
 import io.vavr.control.Option;
 import io.vavr.control.Try;
 import io.vavr.control.Validation;
+import io.vavr.test.Arbitrary;
+import io.vavr.test.Property;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.collections.CollectionUtils;
 import org.junit.Test;
 
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.Collections;
-import java.util.Optional;
 import java.util.Scanner;
 import java.util.function.BiFunction;
 import java.util.function.Function;
-import java.util.function.Predicate;
-import java.util.function.Supplier;
 
 import static io.vavr.API.*;
+import static io.vavr.Predicates.isIn;
 import static org.junit.Assert.*;
 
 /**
@@ -298,23 +299,22 @@ public class VavrTest {
     }
 
     public static void displayHelp() {
-        System.out.println("help");
+        System.out.println("help info...");
     }
 
     public static void displayVersion() {
-        System.out.println("version aaa");
-    }
-
-    public static Predicate<String> isIn(String... args) {
-        return x -> Optional.ofNullable(args).map(valid -> Arrays.asList(valid).contains(x)).orElse(false);
+        System.out.println("version info...");
     }
 
     @Test
-    public void t2() {
-        String[] x = null;
-        final Option<Boolean> a = Option.of(x).map(array -> Arrays.asList(x).contains("a")).orElse(() -> Option.of(Boolean.FALSE));
-        System.out.println(a.get());
-        final Boolean b = Optional.ofNullable(x).map(array -> Arrays.asList(array).contains("a")).orElse(false);
-        System.out.println(b);
+    public void testPropertyChecking() {
+        Arbitrary<Integer> ints = Arbitrary.integer();
+
+        // square(int) >= 0: OK, passed 1000 tests.
+        Property.def("square(int) >= 0")
+                .forAll(ints)
+                .suchThat(i -> i * i >= 0)
+                .check()
+                .assertIsSatisfied();
     }
 }
