@@ -112,7 +112,7 @@ public class VavrTest {
         assertEquals(-1, errorSentinel);
     }
 
-    @Test(expected = ArithmeticException.class)
+    @Test(expected = MyException.class)
     public void givenBadCode_whenTryHandles_thenCorrect3() {
         Try<Integer> result = Try.of(() -> 1 / 0);
         result.getOrElseThrow(MyException::new);
@@ -287,16 +287,16 @@ public class VavrTest {
     }
 
     //    @Test
-    public static void main(String[] a) throws IOException {
-        String arg = new Scanner(System.in).nextLine();
-        Match(arg).of(
-                Case($(isIn("-h", "--help")), o -> run(VavrTest::displayHelp)),
-                Case($(isIn("-v", "--version")), o -> run(VavrTest::displayVersion)),
-                Case($(), o -> run(() -> {
-                    throw new IllegalArgumentException(arg);
-                }))
-        );
-    }
+    // public static void main(String[] a) throws IOException {
+    //     String arg = new Scanner(System.in).nextLine();
+    //     Match(arg).of(
+    //             Case($(isIn("-h", "--help")), o -> run(VavrTest::displayHelp)),
+    //             Case($(isIn("-v", "--version")), o -> run(VavrTest::displayVersion)),
+    //             Case($(), o -> run(() -> {
+    //                 throw new IllegalArgumentException(arg);
+    //             }))
+    //     );
+    // }
 
     public static void displayHelp() {
         System.out.println("help info...");
