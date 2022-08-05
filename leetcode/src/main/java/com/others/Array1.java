@@ -1,6 +1,6 @@
-package com.leetcode.array;
+package com.others;
 
-import com.leetcode.dto.Node;
+import com.dto.Node;
 import lombok.extern.slf4j.Slf4j;
 
 /**

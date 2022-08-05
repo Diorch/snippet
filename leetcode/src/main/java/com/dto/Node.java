@@ -1,4 +1,4 @@
-package com.leetcode.dto;
+package com.dto;
 
 import com.ioutility.Reader;
 import lombok.Data;
