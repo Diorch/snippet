@@ -4,7 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * 无重复字符的最长子串
+ * 无重复字符的最长子串(The Longest Substring Without Repeating Characters)
  *
  * @author diorch
  */
@@ -15,9 +15,9 @@ public class Q3 {
             return 0;
         }
 
+        // 子串中是否存在重复字符，我们使用map存储字符出现的位置。
         Map<Character, Integer> map = new HashMap<>();
         int max = 0;
-        int length = 0;
         int left = 0;
 
         /*
@@ -31,19 +31,22 @@ public class Q3 {
                而且b包含在最长有效子段中，就是1）的情况，我们更新 left=map.get(b)+1=2，此时子段更新为 b，而且map中仍然包含a，
                map.get(a)=0；随后，我们遍历到a，发现a包含在map中，且map.get(a)=0，如果我们像1）一样处理，就会发现
                left=map.get(a)+1=1，实际上，left此时应该不变，left始终为2，子段变成 ba才对。
-
-         为了处理以上2类情况，我们每次更新left，left=Math.max(left , map.get(ch)+1).
+         为了处理以上2类情况，我们每次更新left: left=Math.max(left , map.get(ch)+1).
          另外，更新left后，不管原来的 s.charAt(i) 是否在最长子段中，我们都要将 s.charAt(i) 的位置更新为当前的i，
          因此此时新的 s.charAt(i) 已经进入到 当前最长的子段中！
          */
 
         for (int i = 0; i < s.length(); i++) {
+            // 右指针的下一个字符是否已经存在于map中，若是，则左窗口右移到该字符出现位置的下一位（因为从左指针到这一位中间是必然有重复的）
             if (map.containsKey(s.charAt(i))) {
                 left = Math.max(left, map.get(s.charAt(i)) + 1);
             }
+
+            // 不管原来的 s.charAt(i) 是否在最长子段中，我们都要将 s.charAt(i) 的位置更新为当前的i
             map.put(s.charAt(i), i);
+            // 每次刷新窗口时，都要对窗口长度进行计算，若大于原来标记的最大窗口长度，则进行更新
             max = Math.max(max, i - left + 1);
         }
-        return 0;
+        return max;
     }
 }
