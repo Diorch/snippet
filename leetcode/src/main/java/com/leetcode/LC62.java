@@ -5,7 +5,7 @@ package com.leetcode;
  *
  * @author diorch
  */
-public class Q62 {
+public class LC62 {
 
     public int uniquePaths(int m, int n) {
         int[][] dp = new int[m][n];

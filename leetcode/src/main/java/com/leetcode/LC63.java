@@ -4,7 +4,7 @@ package com.leetcode;
  * 不同路径2，障碍物
  * @author diorch
  */
-public class Q63 {
+public class LC63 {
     public int uniquePathsWithObstacles(int[][] obstacleGrid) {
 
         int n = obstacleGrid.length;

@@ -32,9 +32,8 @@ public class Solution206 {
     // 遍历
     public static ListNode solution1(ListNode list) {
         ListNode prev = null;
-        ListNode next = null;
         while (list != null) {
-            next = list.next;
+            ListNode next = list.next;
             list.next = prev;
             prev = list;
             list = next;

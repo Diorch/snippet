@@ -5,7 +5,7 @@ package com.leetcode;
  *
  * @author diorch
  */
-public class Q746 {
+public class LC746 {
     public int minCostClimbingStairs(int[] cost) {
         int[] dp = new int[cost.length];
         dp[0] = cost[0];

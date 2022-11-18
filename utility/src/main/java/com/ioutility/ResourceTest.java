@@ -4,21 +4,59 @@ import sun.net.util.URLUtil;
 
 import java.io.*;
 import java.net.URL;
+import java.util.concurrent.atomic.AtomicInteger;
 
 /**
  * @author DechuYe
  */
 public class ResourceTest {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
 
+        // Scanner input=new Scanner(System.in);
+        // String str=input.next();
+        System.out.println("hello world");
+        String s = "A1B2C3";
+        AtomicInteger atI = new AtomicInteger(0);
+        Object lock = new Object();
+
+        new Thread(() -> {
+            for (int i = 0; i < 3; i++) {
+                try {
+                    synchronized (lock) {
+                        System.out.println(s.charAt(atI.getAndIncrement()));
+                        lock.notifyAll();
+                        lock.wait();
+                    }
+                }
+                catch (InterruptedException e) {
+                    //
+                }
+            }
+        }).start();
+
+        new Thread(() -> {
+            for (int i = 0; i < 3; i++) {
+                try {
+                    synchronized (lock) {
+                        System.out.println(s.charAt(atI.getAndIncrement()));
+                        lock.notifyAll();
+                        lock.wait();
+                    }
+                }
+                catch (InterruptedException e) {
+                    //
+                }
+            }
+        }).start();
+        System.in.read();
 
         System.out.println(System.getProperty("sun.boot.class.path"));
         System.out.println(System.getProperty("java.ext.dirs"));
         System.out.println(System.getProperty("java.class.path"));
         System.out.println(System.getProperty("user.dir"));
         System.out.println(System.getProperty("CLASSPATH"));
-//        testResource();
+        //        testResource();
 
     }
 
