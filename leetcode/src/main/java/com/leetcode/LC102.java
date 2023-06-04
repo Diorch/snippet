@@ -2,31 +2,14 @@ package com.leetcode;
 
 import java.util.*;
 
+import com.dto.TreeNode;
+
 /**
  * 二叉树层序遍历
  *
  * @author diorch
  */
 public class LC102 {
-
-    static class TreeNode {
-        int val;
-        TreeNode left;
-        TreeNode right;
-
-        TreeNode() {
-        }
-
-        TreeNode(int val) {
-            this.val = val;
-        }
-
-        TreeNode(int val, TreeNode left, TreeNode right) {
-            this.val = val;
-            this.left = left;
-            this.right = right;
-        }
-    }
 
     public static List<List<Integer>> solution(TreeNode root) {
         List<List<Integer>> ans = new ArrayList<>();
@@ -51,6 +34,37 @@ public class LC102 {
                 }
             }
             ans.add(temp);
+        }
+        return ans;
+    }
+
+    /**
+     * 2023.05.06 17:00
+     */
+    public static List<List<Integer>> t2(TreeNode root) {
+        List<List<Integer>> ans = new ArrayList<>();
+        if (root == null) {
+            return ans;
+        }
+
+        Queue<TreeNode> q = new ArrayDeque<>();
+        q.add(root);
+        while (!q.isEmpty()) {
+            List<Integer> chunk = new ArrayList<>();
+            int cnt = q.size();
+            while (cnt > 0) {
+                cnt--;
+                TreeNode n = q.poll();
+
+                chunk.add(n.val);
+                if (n.left != null) {
+                    q.add(n.left);
+                }
+                if (n.right != null) {
+                    q.add(n.right);
+                }
+            }
+            ans.add(chunk);
         }
         return ans;
     }

@@ -1,7 +1,5 @@
 package com.ioutility;
 
-import com.google.common.reflect.ClassPath;
-
 import java.io.IOException;
 
 /**
@@ -10,9 +8,9 @@ import java.io.IOException;
 public class GuavaClassPathDemo {
 
     public static void main(String[] args) throws IOException {
-        final ClassPath classPath = ClassPath.from(Thread.currentThread().getContextClassLoader());
-        for (ClassPath.ClassInfo e : classPath.getTopLevelClasses("javax.el")) {
-            System.out.println(e.getName());
-        }
+        // final ClassPath classPath = ClassPath.from(Thread.currentThread().getContextClassLoader());
+        // for (ClassPath.ClassInfo e : classPath.getTopLevelClasses("javax.el")) {
+        //     System.out.println(e.getName());
+        // }
     }
 }
